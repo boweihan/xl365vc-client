@@ -4,13 +4,14 @@
     xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
     xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
     <Id>dd12ded4-446b-46dd-9124-25ca44cf14fd</Id>
-    <Version>0.1.0</Version>
+    <Version>0.1.0.0</Version>
     <ProviderName>Version Buddy</ProviderName>
     <DefaultLocale>en-US</DefaultLocale>
     <DisplayName DefaultValue="Version Buddy"/>
     <Description DefaultValue="User-friendly version control for Excel 365"/>
-    <IconUrl DefaultValue="https://localhost:8443/images/versioning.png"/>
-    <HighResolutionIconUrl DefaultValue="https://localhost:8443/images/versioning.png" />
+    <IconUrl DefaultValue="https://localhost:8443/images/versioning.gif"/>
+    <HighResolutionIconUrl DefaultValue="https://localhost:8443/images/versioning.gif" />
+    <SupportUrl DefaultValue="https://github.com/boweihan/xl365vc-client"/>
     <Hosts>
         <Host Name="Workbook"/>
     </Hosts>
@@ -30,6 +31,7 @@
                     <GetStarted>
                         <Title resid="VersionBuddy.GetStarted.Title"/>
                         <Description resid="VersionBuddy.Main.Description"/>
+                        <LearnMoreUrl resid="VersionBuddy.GetStarted.LearnMoreUrl"/>
                     </GetStarted>
                     <ExtensionPoint xsi:type="PrimaryCommandSurface">
                         <OfficeTab id="TabInsert">
@@ -74,6 +76,7 @@
                 <bt:Image id="VersionBuddy.Img.Logo.80" DefaultValue="https://localhost:8443/images/versioning-80.gif" />
             </bt:Images>
             <bt:Urls>
+                <bt:Url id="VersionBuddy.GetStarted.LearnMoreUrl" DefaultValue="https://github.com/boweihan/xl365vc-client" />
                 <bt:Url id="VersionBuddy.Main.Url" DefaultValue="https://localhost:8443/index.html" />
             </bt:Urls>
             <!-- ShortStrings max characters==125. -->

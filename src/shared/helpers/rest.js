@@ -1,7 +1,6 @@
 // @flow
 
 import axios from 'axios';
-import Errors from 'shared/helpers/errors';
 
 const METHOD = {
   GET: 'get',
@@ -114,14 +113,6 @@ export default class Rest {
     extension: string,
   ) => {
     // bytes must be an array so that we can convert to a signed 8 byte array below
-    if (!Array.isArray(bytes)) {
-      throw new Errors.JSAddinException(
-        'Called postMultiPartFormData with non-byte array, saw "' +
-          typeof bytes +
-          '" instead',
-      );
-    }
-
     var signedBytes = new Int8Array(bytes);
     var formData = new FormData();
     var blob = new Blob([signedBytes], {
