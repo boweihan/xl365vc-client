@@ -1,0 +1,18 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+module.name_mapper='^__tests__\(.*\)$' -> '<PROJECT_ROOT>/src/__tests__/\1'
+module.name_mapper='^actions\(.*\)$' -> '<PROJECT_ROOT>/src/actions/\1'
+module.name_mapper='^shared\(.*\)$' -> '<PROJECT_ROOT>/src/shared/\1'
+module.name_mapper='^redux\(.*\)$' -> '<PROJECT_ROOT>/src/redux/\1'
+module.name_mapper='^views\(.*\)$' -> '<PROJECT_ROOT>/src/views/\1'
+module.name_mapper='^core\(.*\)$' -> '<PROJECT_ROOT>/src/core/\1'
+
+[strict]
