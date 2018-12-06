@@ -1,5 +1,5 @@
 {
-  "name": "Version Buddy",
+  "name": "version-buddy",
   "version": "0.1.0",
   "homepage": "./",
   "private": true,
@@ -24,20 +24,19 @@
     "analyze": "source-map-explorer build/static/js/main.*",
     "flow": "flow",
     "precommit": "lint-staged",
-    "start":
-      "REACT_APP_BUILD_TYPE=local HTTPS=true PORT=8443 react-scripts start",
-    "start_windows":
-      "set REACT_APP_BUILD_TYPE=local&&set HTTPS=true&&set PORT=8443&&react-scripts start",
+    "start": "REACT_APP_BUILD_TYPE=local HTTPS=true PORT=8443 react-scripts start",
+    "start_windows": "set REACT_APP_BUILD_TYPE=local&&set HTTPS=true&&set PORT=8443&&react-scripts start",
     "build": "react-scripts build",
-    "test":
-      "react-scripts test --transformIgnorePatterns \"node_modules/(?!office-ui-fabric-react)/\" --env=jsdom",
-    "test:ci":
-      "react-scripts test --transformIgnorePatterns \"node_modules/(?!office-ui-fabric-react)/\" --env=jsdom --testResultsProcessor ./node_modules/jest-junit",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!office-ui-fabric-react)/\" --env=jsdom",
+    "test:ci": "react-scripts test --transformIgnorePatterns \"node_modules/(?!office-ui-fabric-react)/\" --env=jsdom --testResultsProcessor ./node_modules/jest-junit",
     "testcoverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "babel-jest": "^22.4.3",
@@ -55,7 +54,10 @@
     "source-map-explorer": "^1.6.0"
   },
   "jest": {
-    "coverageReporters": ["lcov", "text"]
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
   },
   "jest-junit": {
     "suiteName": "jest tests",
