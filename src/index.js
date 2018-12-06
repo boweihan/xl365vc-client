@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import store from 'shared/store/configureStore';
-import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 import { VBThemeProvider } from 'shared/themes/withVBTheme';
 import colors from 'shared/constants/colors';
 import type { Theme } from 'shared/types';
@@ -16,7 +15,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const Office = window.Office;
-initializeIcons();
 
 const theme: Theme = {
   colors,

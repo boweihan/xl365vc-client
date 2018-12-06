@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});
@@ -25,4 +24,7 @@ class Ignition extends Component<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Ignition);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Ignition);
