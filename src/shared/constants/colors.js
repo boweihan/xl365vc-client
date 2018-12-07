@@ -2,4 +2,5 @@
 
 export default {
   white: '#FFFFFF',
+  orange: 'orange',
 };

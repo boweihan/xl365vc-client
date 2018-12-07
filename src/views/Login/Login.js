@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { LoginButton } from 'views/Login';
-import AppContainer from './AppContainer';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});
@@ -11,7 +9,7 @@ const mapDispatchToProps = () => ({});
 type Props = {};
 type State = {};
 
-class Ignition extends Component<Props, State> {
+class Login extends Component<Props, State> {
   state = {};
 
   constructor(props) {
@@ -23,9 +21,9 @@ class Ignition extends Component<Props, State> {
 
   render() {
     return (
-      <AppContainer>
-        <LoginButton />
-      </AppContainer>
+      <a href="https://accounts.google.com/ServiceLogin/signinchooser?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
+        boop
+      </a>
     );
   }
 }
@@ -33,4 +31,4 @@ class Ignition extends Component<Props, State> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Ignition);
+)(Login);
