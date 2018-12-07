@@ -11,8 +11,12 @@ const METHOD = {
 };
 
 export default class Rest {
-  static headers(auth: ?string, isMultiPart: boolean) {
-    let optionalHeaders = {
+  static headers(
+    auth: ?string,
+    optionalHeaders: ?Object,
+    isMultiPart: boolean,
+  ) {
+    optionalHeaders = optionalHeaders || {
       'Content-Type': 'application/json',
     };
     const staticHeaders = {
@@ -29,40 +33,75 @@ export default class Rest {
     };
   }
 
-  static get(route: string, auth: ?string, timeout?: number) {
-    return this.xhr(route, auth, null, METHOD.GET, timeout);
+  static get(
+    route: string,
+    auth: ?string,
+    optionalHeaders: ?Object,
+    timeout?: number,
+  ) {
+    return this.xhr(route, auth, null, METHOD.GET, optionalHeaders, timeout);
   }
 
-  static put(route: string, auth: ?string, params: any, timeout?: number) {
-    return this.xhr(route, auth, params, METHOD.PUT, timeout);
+  static put(
+    route: string,
+    auth: ?string,
+    params: any,
+    optionalHeaders: ?Object,
+    timeout?: number,
+  ) {
+    return this.xhr(route, auth, params, METHOD.PUT, optionalHeaders, timeout);
   }
 
-  static patch(route: string, auth: ?string, params: any, timeout?: number) {
-    return this.xhr(route, auth, params, METHOD.PATCH, timeout);
+  static patch(
+    route: string,
+    auth: ?string,
+    params: any,
+    optionalHeaders: ?Object,
+    timeout?: number,
+  ) {
+    return this.xhr(
+      route,
+      auth,
+      params,
+      METHOD.PATCH,
+      optionalHeaders,
+      timeout,
+    );
   }
 
-  static post(route: string, auth: ?string, params: any, timeout?: number) {
-    return this.xhr(route, auth, params, METHOD.POST, timeout);
+  static post(
+    route: string,
+    auth: ?string,
+    params: any,
+    optionalHeaders: ?Object,
+    timeout?: number,
+  ) {
+    return this.xhr(route, auth, params, METHOD.POST, optionalHeaders, timeout);
   }
 
-  static delete(route: string, auth: ?string, params: any, timeout?: number) {
-    return this.xhr(route, auth, params, METHOD.DELETE, timeout);
+  static delete(
+    route: string,
+    auth: ?string,
+    params: any,
+    optionalHeaders: ?Object,
+    timeout?: number,
+  ) {
+    return this.xhr(
+      route,
+      auth,
+      params,
+      METHOD.DELETE,
+      optionalHeaders,
+      timeout,
+    );
   }
-
-  static getTransformedParams = (params: any, isMultiPart: boolean): any => {
-    if (params) {
-      if (isMultiPart) {
-        return params;
-      }
-      return JSON.stringify(params);
-    }
-  };
 
   static xhr(
     route: string,
     auth: ?string,
     params: any,
     verb: string,
+    optionalHeaders: ?Object,
     timeout?: number,
   ) {
     let isMultiPart = false;
@@ -74,8 +113,8 @@ export default class Rest {
       method: verb,
       baseURL: route,
       timeout: timeout || 600000, // default 10 minute timeout
-      headers: Rest.headers(auth, isMultiPart),
-      data: Rest.getTransformedParams(params, isMultiPart),
+      headers: Rest.headers(auth, optionalHeaders, isMultiPart),
+      data: params,
     });
 
     return instance()

@@ -13,6 +13,7 @@ import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import classNames from 'classnames';
 import Locale from 'shared/localization';
 import Logo from 'core/assets/logo.png';
+import ApiService from 'shared/services/ApiService';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});
@@ -59,6 +60,11 @@ class Login extends Component<Props, State> {
     this.setState(state => ({ showPassword: !state.showPassword }));
   };
 
+  login = () => {
+    const { account, password } = this.state;
+    ApiService.login(account, password);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -100,7 +106,7 @@ class Login extends Component<Props, State> {
             ),
           }}
         />
-        <LoginButton />
+        <LoginButton onClick={this.login} />
       </div>
     );
   }
