@@ -8,8 +8,12 @@
 let UIStrings = (function() {
   var UIStrings = {};
 
-  // English (alphabetically ordered)
-  UIStrings.EN = {};
+  UIStrings.EN = {
+    login: 'Login',
+    delete: 'Delete',
+    togglePasswordVisibilty: 'Toggle password visibility',
+    logoAlt: 'Version Buddy Logo',
+  };
 
   // French
   UIStrings.FR = {};

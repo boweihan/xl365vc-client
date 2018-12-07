@@ -4,44 +4,35 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import Dialog from 'core/Dialog';
 import colors from 'shared/constants/colors';
+import Locale from 'shared/localization';
 
 type Props = {
   classes: Object,
+  onClick: Function,
 };
 
 const styles = theme => ({
-  buttonContainer: {
-    flex: 1,
-    alignSelf: 'center',
-    textAlign: 'center',
-  },
   fab: {
     margin: theme.spacing.unit,
     backgroundColor: colors.orange,
+    borderRadius: 5,
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
   },
 });
 
-const login = () => {
-  new Dialog('oauth').show();
-};
-
-const LoginButton = ({ classes }: Props) => (
-  <div className={classes.buttonContainer}>
-    <Fab
-      variant="extended"
-      aria-label="Delete"
-      className={classes.fab}
-      onClick={login}
-    >
-      <NavigationIcon className={classes.extendedIcon} />
-      Login
-    </Fab>
-  </div>
+const LoginButton = ({ classes, onClick }: Props) => (
+  <Fab
+    variant="extended"
+    aria-label={Locale.delete}
+    className={classes.fab}
+    onClick={onClick}
+  >
+    <NavigationIcon className={classes.extendedIcon} />
+    {Locale.login}
+  </Fab>
 );
 
 export default withStyles(styles)(LoginButton);

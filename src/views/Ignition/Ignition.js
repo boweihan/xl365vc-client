@@ -2,31 +2,63 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { LoginButton } from 'views/Login';
+import { Login } from 'views/Login';
 import AppContainer from './AppContainer';
+import { updateRoute } from 'redux/actions/routeActions';
+import type { Route } from 'shared/types/index';
+import { LOGIN_ROUTE } from 'shared/constants/routes';
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = () => ({});
+const mapStateToProps = ({ ui }) => ({
+  ui,
+});
 
-type Props = {};
+const mapDispatchToProps = {
+  updateRoute,
+};
+
+type Props = {
+  updateRoute: Function,
+  ui: {
+    route: Route,
+  },
+};
+
 type State = {};
+
+const componentMap = {
+  [LOGIN_ROUTE]: <Login />,
+};
 
 class Ignition extends Component<Props, State> {
   state = {};
 
   constructor(props) {
     super(props);
-    this.initialize();
+    this.checkIfDialog();
   }
 
-  initialize = () => {};
+  checkIfDialog = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const routeName = urlParams.get('route');
+    if (routeName) {
+      this.props.updateRoute({ name: routeName });
+    }
+  };
+
+  getComponentFromRouteName = (name: string) => {
+    let component = componentMap[name];
+    if (this.props.ui.route && this.props.ui.route.props) {
+      if (component) {
+        component = React.cloneElement(component, this.props.ui.route.props);
+      }
+    }
+    return component;
+  };
 
   render() {
-    return (
-      <AppContainer>
-        <LoginButton />
-      </AppContainer>
-    );
+    const { ui } = this.props;
+    const { name } = ui.route;
+    return <AppContainer>{this.getComponentFromRouteName(name)}</AppContainer>;
   }
 }
 

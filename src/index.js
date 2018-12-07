@@ -9,10 +9,10 @@ import { VBThemeProvider } from 'shared/themes/withVBTheme';
 import colors from 'shared/constants/colors';
 import type { Theme } from 'shared/types';
 
-if (process.env.NODE_ENV !== 'production') {
-  const { whyDidYouUpdate } = require('why-did-you-update');
-  whyDidYouUpdate(React);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   const { whyDidYouUpdate } = require('why-did-you-update');
+//   whyDidYouUpdate(React);
+// }
 
 const Office = window.Office;
 

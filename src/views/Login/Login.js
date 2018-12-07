@@ -2,28 +2,106 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import LoginButton from './LoginButton';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import VerifiedUser from '@material-ui/icons/VerifiedUser';
+import classNames from 'classnames';
+import Locale from 'shared/localization';
+import Logo from 'core/assets/logo.png';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});
 
-type Props = {};
-type State = {};
+type Props = {
+  classes: Object,
+};
+
+type State = {
+  account: string,
+  password: string,
+  showPassword: boolean,
+};
+
+const styles = theme => ({
+  logo: {
+    width: '100%',
+  },
+  loginContainer: {
+    flex: 1,
+    alignSelf: 'center',
+    textAlign: 'center',
+  },
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  textField: {
+    flexBasis: 200,
+  },
+});
 
 class Login extends Component<Props, State> {
-  state = {};
+  state = {
+    account: '',
+    password: '',
+    showPassword: false,
+  };
 
-  constructor(props) {
-    super(props);
-    this.initialize();
-  }
+  handleChange = prop => event => {
+    this.setState({ [prop]: event.target.value });
+  };
 
-  initialize = () => {};
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
 
   render() {
+    const { classes } = this.props;
     return (
-      <a href="https://accounts.google.com/ServiceLogin/signinchooser?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
-        boop
-      </a>
+      <div className={classes.loginContainer}>
+        <img className={classes.logo} src={Logo} alt={Locale.logoAlt} />
+        <TextField
+          className={classNames(classes.margin, classes.textField)}
+          variant="outlined"
+          label="Account"
+          value={this.state.account}
+          onChange={this.handleChange('account')}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton>
+                  <VerifiedUser />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          className={classNames(classes.margin, classes.textField)}
+          variant="outlined"
+          type={this.state.showPassword ? 'text' : 'password'}
+          label="Password"
+          value={this.state.password}
+          onChange={this.handleChange('password')}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={Locale.togglePasswordVisibilty}
+                  onClick={this.handleClickShowPassword}
+                >
+                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <LoginButton />
+      </div>
     );
   }
 }
@@ -31,4 +109,4 @@ class Login extends Component<Props, State> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login);
+)(withStyles(styles)(Login));
