@@ -13,13 +13,16 @@ import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import classNames from 'classnames';
 import Locale from 'shared/localization';
 import Logo from 'core/assets/logo.png';
-import ApiService from 'shared/services/ApiService';
+import { login } from 'views/Login/actions.js';
 
 const mapStateToProps = () => ({});
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = {
+  login,
+};
 
 type Props = {
   classes: Object,
+  login: Function,
 };
 
 type State = {
@@ -60,13 +63,9 @@ class Login extends Component<Props, State> {
     this.setState(state => ({ showPassword: !state.showPassword }));
   };
 
-  login = () => {
-    const { account, password } = this.state;
-    ApiService.login(account, password);
-  };
-
   render() {
     const { classes } = this.props;
+    const { account, password } = this.state;
     return (
       <div className={classes.loginContainer}>
         <img className={classes.logo} src={Logo} alt={Locale.logoAlt} />
@@ -106,7 +105,7 @@ class Login extends Component<Props, State> {
             ),
           }}
         />
-        <LoginButton onClick={this.login} />
+        <LoginButton onClick={() => this.props.login(account, password)} />
       </div>
     );
   }

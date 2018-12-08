@@ -3,10 +3,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Login } from 'views/Login';
+import { Home } from 'views/Home';
 import AppContainer from './AppContainer';
 import { updateRoute } from 'redux/actions/routeActions';
 import type { Route } from 'shared/types/index';
-import { LOGIN_ROUTE } from 'shared/constants/routes';
+import { LOGIN_ROUTE, HOME_ROUTE } from 'shared/constants/routes';
 
 const mapStateToProps = ({ ui }) => ({
   ui,
@@ -27,6 +28,7 @@ type State = {};
 
 const componentMap = {
   [LOGIN_ROUTE]: <Login />,
+  [HOME_ROUTE]: <Home />,
 };
 
 class Ignition extends Component<Props, State> {
