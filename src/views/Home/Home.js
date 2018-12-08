@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import HomeList from './HomeList';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = {};
@@ -18,7 +19,11 @@ const styles = theme => ({});
 class Home extends Component<Props, State> {
   render() {
     const { classes } = this.props;
-    return <div className={classes.loginContainer}>boop</div>;
+    return (
+      <div>
+        <HomeList />
+      </div>
+    );
   }
 }
 

@@ -33,12 +33,19 @@ type State = {
 
 const styles = theme => ({
   logo: {
-    width: '100%',
+    width: '80%',
+    margin: '10%',
   },
   loginContainer: {
-    flex: 1,
+    display: 'flex',
     alignSelf: 'center',
     textAlign: 'center',
+  },
+  formBackground: {
+    backgroundColor: 'white',
+    with: '80%',
+    margin: '5%',
+    padding: '5%',
   },
   margin: {
     margin: theme.spacing.unit,
@@ -68,44 +75,47 @@ class Login extends Component<Props, State> {
     const { account, password } = this.state;
     return (
       <div className={classes.loginContainer}>
-        <img className={classes.logo} src={Logo} alt={Locale.logoAlt} />
-        <TextField
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="Account"
-          value={this.state.account}
-          onChange={this.handleChange('account')}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton>
-                  <VerifiedUser />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          type={this.state.showPassword ? 'text' : 'password'}
-          label="Password"
-          value={this.state.password}
-          onChange={this.handleChange('password')}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label={Locale.togglePasswordVisibilty}
-                  onClick={this.handleClickShowPassword}
-                >
-                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <LoginButton onClick={() => this.props.login(account, password)} />
+        <div className={classes.formBackground}>
+          <TextField
+            className={classNames(classes.margin, classes.textField)}
+            label="Account"
+            value={this.state.account}
+            onChange={this.handleChange('account')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton>
+                    <VerifiedUser />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            className={classNames(classes.margin, classes.textField)}
+            type={this.state.showPassword ? 'text' : 'password'}
+            label="Password"
+            value={this.state.password}
+            onChange={this.handleChange('password')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label={Locale.togglePasswordVisibilty}
+                    onClick={this.handleClickShowPassword}
+                  >
+                    {this.state.showPassword ? (
+                      <VisibilityOff />
+                    ) : (
+                      <Visibility />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <LoginButton onClick={() => this.props.login(account, password)} />
+        </div>
       </div>
     );
   }

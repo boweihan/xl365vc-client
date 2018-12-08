@@ -11,7 +11,11 @@ type Props = {
 const styles = theme => ({
   appContainer: {
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     height: '100vh',
+    backgroundColor: '#EEEEEE',
+    border: '10px solid white',
   },
 });
 

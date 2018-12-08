@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import colors from 'shared/constants/colors';
+import KeyboardTab from '@material-ui/icons/KeyboardTab';
+import Button from '@material-ui/core/Button';
 import Locale from 'shared/localization';
 
 type Props = {
@@ -13,10 +12,9 @@ type Props = {
 };
 
 const styles = theme => ({
-  fab: {
-    margin: theme.spacing.unit,
-    backgroundColor: colors.orange,
-    borderRadius: 5,
+  button: {
+    width: '90%',
+    marginTop: 20,
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
@@ -24,15 +22,15 @@ const styles = theme => ({
 });
 
 const LoginButton = ({ classes, onClick }: Props) => (
-  <Fab
-    variant="extended"
-    aria-label={Locale.delete}
-    className={classes.fab}
+  <Button
+    variant="contained"
+    size="medium"
+    className={classes.button}
     onClick={onClick}
   >
-    <NavigationIcon className={classes.extendedIcon} />
+    <KeyboardTab className={classes.extendedIcon} />
     {Locale.login}
-  </Fab>
+  </Button>
 );
 
 export default withStyles(styles)(LoginButton);
