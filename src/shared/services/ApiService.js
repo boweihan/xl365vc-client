@@ -1,7 +1,7 @@
 import rest from 'shared/helpers/rest';
 
 export default class ApiService {
-  static login = async (account, password) => {
+  static login = (account, password) => {
     const bodyProps = {
       grant_type: 'password',
       username: account,
@@ -14,7 +14,7 @@ export default class ApiService {
       body.push(encodedKey + '=' + encodedValue);
     }
     body = body.join('&');
-    await rest.post(
+    return rest.post(
       'http://localhost:8000/oauth/token',
       'Basic ' + btoa('fooClientIdPassword:secret'),
       body,
