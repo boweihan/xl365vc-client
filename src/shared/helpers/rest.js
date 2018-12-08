@@ -157,8 +157,10 @@ export default class Rest {
     var blob = new Blob([signedBytes], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     });
-    formData.append('data', blob, 'jsaddin.' + extension);
+    formData.append('file', blob, 'version.' + extension);
 
-    return Rest.post(url, auth, formData);
+    return Rest.post(url, auth, formData, {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    });
   };
 }

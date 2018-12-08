@@ -12,16 +12,18 @@ import ViewList from '@material-ui/icons/ViewList';
 import Divider from '@material-ui/core/Divider';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Locale from 'shared/localization';
-import { logout } from './actions';
+import { logout, createVersion } from './actions';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = {
   logout,
+  createVersion,
 };
 
 type Props = {
   classes: Object,
   logout: Function,
+  createVersion: Function,
 };
 type State = {};
 
@@ -35,7 +37,7 @@ const styles = theme => ({
 
 class SimpleList extends Component<Props, State> {
   render() {
-    const { classes, logout } = this.props;
+    const { classes, logout, createVersion } = this.props;
     return (
       <div className={classes.root}>
         <List component="nav">
@@ -45,7 +47,7 @@ class SimpleList extends Component<Props, State> {
             </ListItemIcon>
             <ListItemText primary={Locale.viewVersions} />
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={createVersion}>
             <ListItemIcon>
               <CreateNewFolder />
             </ListItemIcon>

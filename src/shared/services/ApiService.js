@@ -1,6 +1,14 @@
 import rest from 'shared/helpers/rest';
+import store from 'shared/store/configureStore';
+
+const AUTH_SERVER_URL = 'http://localhost:8000';
+const RESOURCE_SERVER_URL = 'http://localhost:8001';
 
 export default class ApiService {
+  static getBearerToken = () => {
+    return store.getState().auth.authObj.access_token;
+  };
+
   static login = (account, password) => {
     const bodyProps = {
       grant_type: 'password',
@@ -15,10 +23,19 @@ export default class ApiService {
     }
     body = body.join('&');
     return rest.post(
-      'http://localhost:8000/oauth/token',
-      'Basic ' + btoa('fooClientIdPassword:secret'),
+      `${AUTH_SERVER_URL}/oauth/token`,
+      `Basic ${btoa('fooClientIdPassword:secret')}`,
       body,
       { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    );
+  };
+
+  static saveVersion = data => {
+    return rest.postMultiPartFormData(
+      `${RESOURCE_SERVER_URL}/versions`,
+      `Bearer ${ApiService.getBearerToken()}`,
+      data,
+      'xlsx',
     );
   };
 }
