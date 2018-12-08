@@ -39,6 +39,13 @@ export default class ApiService {
     );
   };
 
+  static deleteVersion = (name: string) => {
+    return rest.delete(
+      `${RESOURCE_SERVER_URL}/versions/${name}`,
+      `Bearer ${ApiService.getBearerToken()}`,
+    );
+  };
+
   static getVersions = () => {
     return rest.get(
       `${RESOURCE_SERVER_URL}/versions`,

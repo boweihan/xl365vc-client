@@ -15,16 +15,20 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VersionListBackBar from './VersionListBackBar';
 import { updateRoute } from 'redux/actions/routeActions';
 import { HOME_ROUTE } from 'shared/constants/routes';
+import Locale from 'shared/localization';
+import { deleteVersion } from './actions';
 
 const mapStateToProps = ({ version }) => ({ version });
 const mapDispatchToProps = {
   updateRoute,
+  deleteVersion,
 };
 
 type Props = {
   classes: Object,
   version: Object,
   updateRoute: Function,
+  deleteVersion: Function,
 };
 
 type State = {};
@@ -44,7 +48,7 @@ const styles = theme => ({
 
 class VersionList extends Component<Props, State> {
   render() {
-    const { classes, version, updateRoute } = this.props;
+    const { classes, version, updateRoute, deleteVersion } = this.props;
     return (
       <div className={classes.versionListContainer}>
         <VersionListBackBar onClick={() => updateRoute({ name: HOME_ROUTE })} />
@@ -63,7 +67,10 @@ class VersionList extends Component<Props, State> {
                   secondary={new Date().getTime()}
                 />
                 <ListItemSecondaryAction>
-                  <IconButton aria-label="Delete">
+                  <IconButton
+                    aria-label={Locale.delete}
+                    onClick={() => deleteVersion(fileVersion.name)}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
