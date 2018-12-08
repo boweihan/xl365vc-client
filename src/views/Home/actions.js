@@ -9,6 +9,9 @@ import {
   CREATE_VERSION_PENDING,
   CREATE_VERSION_SUCCESS,
   CREATE_VERSION_FAILURE,
+  VIEW_VERSIONS_PENDING,
+  VIEW_VERSIONS_SUCCESS,
+  VIEW_VERSIONS_FAILURE,
 } from './types';
 
 export const logout = () => ({
@@ -28,5 +31,12 @@ export const createVersion = () => ({
     const data = await DataService.getFileData();
     await ApiService.saveVersion(data);
     return null;
+  },
+});
+
+export const viewVersions = () => ({
+  types: [VIEW_VERSIONS_PENDING, VIEW_VERSIONS_SUCCESS, VIEW_VERSIONS_FAILURE],
+  promise: async () => {
+    return await ApiService.getVersions();
   },
 });

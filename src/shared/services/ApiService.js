@@ -38,4 +38,11 @@ export default class ApiService {
       'xlsx',
     );
   };
+
+  static getVersions = () => {
+    return rest.get(
+      `${RESOURCE_SERVER_URL}/versions`,
+      `Bearer ${ApiService.getBearerToken()}`,
+    );
+  };
 }

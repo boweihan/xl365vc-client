@@ -18,7 +18,6 @@ const styles = theme => ({});
 
 class Home extends Component<Props, State> {
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <HomeList />
