@@ -1,77 +1,72 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
+import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
+import ViewList from '@material-ui/icons/ViewList';
+import Divider from '@material-ui/core/Divider';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import Locale from 'shared/localization';
+import { logout } from './actions';
+
+const mapStateToProps = () => ({});
+const mapDispatchToProps = {
+  logout,
+};
+
+type Props = {
+  classes: Object,
+  logout: Function,
+};
+type State = {};
 
 const styles = theme => ({
   root: {
     width: '90%',
     margin: '5%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
 });
 
-class CheckboxList extends React.Component {
-  state = {
-    checked: [0],
-  };
-
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked,
-    });
-  };
-
+class SimpleList extends Component<Props, State> {
   render() {
-    const { classes } = this.props;
-
+    const { classes, logout } = this.props;
     return (
-      <List className={classes.root}>
-        {[0, 1, 2, 3].map(value => (
-          <ListItem
-            key={value}
-            role={undefined}
-            dense
-            button
-            onClick={this.handleToggle(value)}
-          >
-            <Checkbox
-              checked={this.state.checked.indexOf(value) !== -1}
-              tabIndex={-1}
-              disableRipple
-            />
-            <ListItemText primary={`Line item ${value + 1}`} />
-            <ListItemSecondaryAction>
-              <IconButton aria-label="Comments">
-                <CommentIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+      <div className={classes.root}>
+        <List component="nav">
+          <ListItem button>
+            <ListItemIcon>
+              <ViewList />
+            </ListItemIcon>
+            <ListItemText primary={Locale.viewVersions} />
           </ListItem>
-        ))}
-      </List>
+          <ListItem button>
+            <ListItemIcon>
+              <CreateNewFolder />
+            </ListItemIcon>
+            <ListItemText primary={Locale.createVersion} />
+          </ListItem>
+        </List>
+        <Divider />
+        <List component="nav">
+          <ListItem button onClick={logout}>
+            <ListItemIcon>
+              <ArrowBack />
+            </ListItemIcon>
+            <ListItemText primary={Locale.logout} />
+          </ListItem>
+        </List>
+      </div>
     );
   }
 }
 
-CheckboxList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(CheckboxList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(SimpleList));

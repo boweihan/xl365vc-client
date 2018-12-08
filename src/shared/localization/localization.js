@@ -10,9 +10,12 @@ let UIStrings = (function() {
 
   UIStrings.EN = {
     login: 'Login',
+    logout: 'Logout',
     delete: 'Delete',
     togglePasswordVisibilty: 'Toggle password visibility',
     logoAlt: 'Version Buddy Logo',
+    viewVersions: 'View Saved Documents',
+    createVersion: 'Save Current Document',
   };
 
   // French

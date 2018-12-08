@@ -4,6 +4,7 @@ import createReducer from 'shared/helpers/createReducer';
 import { UPDATE_ROUTE } from 'redux/actions/actionTypes';
 import { LOGIN_ROUTE, HOME_ROUTE } from 'shared/constants/routes';
 import { LOGIN_SUCCESS } from 'views/Login/types';
+import { LOGOUT_SUCCESS } from 'views/Home/types';
 
 const defaultUIState = {
   route: {
@@ -26,5 +27,8 @@ export const ui = createReducer(defaultUIState, {
         name: HOME_ROUTE,
       },
     };
+  },
+  [LOGOUT_SUCCESS](state, action) {
+    return defaultUIState;
   },
 });

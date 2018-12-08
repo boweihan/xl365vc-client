@@ -12,7 +12,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import classNames from 'classnames';
 import Locale from 'shared/localization';
-import Logo from 'core/assets/logo.png';
 import { login } from 'views/Login/actions.js';
 
 const mapStateToProps = () => ({});
