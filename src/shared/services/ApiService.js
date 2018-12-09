@@ -36,23 +36,23 @@ export default class ApiService {
 
   static saveVersion = data => {
     return rest.postMultiPartFormData(
-      `${RESOURCE_SERVER_URL}/versions`,
+      `${RESOURCE_SERVER_URL}/file/${ApiService.getDocumentId()}/versions`,
       `Bearer ${ApiService.getBearerToken()}`,
       data,
-      `${ApiService.getDocumentId()}_${new Date().getTime()}`,
+      `${new Date().getTime()}.xlsx`,
     );
   };
 
   static deleteVersion = (name: string) => {
     return rest.delete(
-      `${RESOURCE_SERVER_URL}/versions/${name}`,
+      `${RESOURCE_SERVER_URL}/file/${ApiService.getDocumentId()}/versions/${name}`,
       `Bearer ${ApiService.getBearerToken()}`,
     );
   };
 
   static getVersions = () => {
     return rest.get(
-      `${RESOURCE_SERVER_URL}/versions`,
+      `${RESOURCE_SERVER_URL}/file/${ApiService.getDocumentId()}/versions`,
       `Bearer ${ApiService.getBearerToken()}`,
     );
   };
