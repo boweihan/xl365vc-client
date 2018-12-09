@@ -6,11 +6,15 @@ import {
   CREATE_VERSION_PENDING,
   CREATE_VERSION_SUCCESS,
   CREATE_VERSION_FAILURE,
+  VIEW_VERSIONS_PENDING,
+  VIEW_VERSIONS_SUCCESS,
+  VIEW_VERSIONS_FAILURE,
 } from 'views/Home/types';
 
 const defaultRequestState = {
   login: false,
   createVersion: false,
+  viewVersions: false,
 };
 
 export const request = createReducer(defaultRequestState, {
@@ -31,5 +35,14 @@ export const request = createReducer(defaultRequestState, {
   },
   [CREATE_VERSION_FAILURE](state, action) {
     return { ...state, createVersion: false };
+  },
+  [VIEW_VERSIONS_PENDING](state, action) {
+    return { ...state, viewVersions: true };
+  },
+  [VIEW_VERSIONS_SUCCESS](state, action) {
+    return { ...state, viewVersions: false };
+  },
+  [VIEW_VERSIONS_FAILURE](state, action) {
+    return { ...state, viewVersions: false };
   },
 });

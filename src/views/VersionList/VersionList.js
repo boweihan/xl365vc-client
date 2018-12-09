@@ -17,8 +17,9 @@ import { updateRoute } from 'redux/actions/routeActions';
 import { HOME_ROUTE } from 'shared/constants/routes';
 import Locale from 'shared/localization';
 import { deleteVersion } from './actions';
+import Progress from 'core/Progress';
 
-const mapStateToProps = ({ version }) => ({ version });
+const mapStateToProps = ({ version, request }) => ({ version, request });
 const mapDispatchToProps = {
   updateRoute,
   deleteVersion,
@@ -27,6 +28,7 @@ const mapDispatchToProps = {
 type Props = {
   classes: Object,
   version: Object,
+  request: Object,
   updateRoute: Function,
   deleteVersion: Function,
 };
@@ -48,36 +50,46 @@ const styles = theme => ({
 
 class VersionList extends Component<Props, State> {
   render() {
-    const { classes, version, updateRoute, deleteVersion } = this.props;
+    const {
+      classes,
+      version,
+      request,
+      updateRoute,
+      deleteVersion,
+    } = this.props;
     return (
       <div className={classes.versionListContainer}>
         <VersionListBackBar onClick={() => updateRoute({ name: HOME_ROUTE })} />
-        <List>
-          {version.fileVersions.map((fileVersion, i) => {
-            return (
-              <ListItem key={i}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <FileCopy />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  className={classes.listItemText}
-                  primary={fileVersion.name}
-                  secondary={new Date().getTime()}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    aria-label={Locale.delete}
-                    onClick={() => deleteVersion(fileVersion.name)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
+        {request.viewVersions ? (
+          <Progress />
+        ) : (
+          <List>
+            {version.fileVersions.map((fileVersion, i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <FileCopy />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    className={classes.listItemText}
+                    primary={fileVersion.name}
+                    secondary={new Date().getTime()}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      aria-label={Locale.delete}
+                      onClick={() => deleteVersion(fileVersion.name)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
+          </List>
+        )}
       </div>
     );
   }
