@@ -13,6 +13,7 @@ import {
   HOME_ROUTE,
   LIST_VERSIONS_ROUTE,
 } from 'shared/constants/routes';
+import { getOrCreateDocumentId } from './actions';
 
 const mapStateToProps = ({ ui }) => ({
   ui,
@@ -20,6 +21,7 @@ const mapStateToProps = ({ ui }) => ({
 
 const mapDispatchToProps = {
   updateRoute,
+  getOrCreateDocumentId,
 };
 
 type Props = {
@@ -43,6 +45,7 @@ class Ignition extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.checkIfDialog();
+    props.getOrCreateDocumentId();
   }
 
   checkIfDialog = () => {
