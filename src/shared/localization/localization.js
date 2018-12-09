@@ -15,7 +15,8 @@ let UIStrings = (function() {
     togglePasswordVisibilty: 'Toggle password visibility',
     logoAlt: 'Version Buddy Logo',
     viewVersions: 'View Saved Documents',
-    createVersion: 'Save Current Document',
+    createVersion: 'Commit Version',
+    creatingVersion: 'Saving your document...',
   };
 
   // French
