@@ -5,10 +5,12 @@ import { withStyles } from '@material-ui/core/styles';
 import KeyboardTab from '@material-ui/icons/KeyboardTab';
 import Button from '@material-ui/core/Button';
 import Locale from 'shared/localization';
+import Progress from 'core/Progress';
 
 type Props = {
   classes: Object,
   onClick: Function,
+  requestPending: boolean,
 };
 
 const styles = theme => ({
@@ -21,15 +23,21 @@ const styles = theme => ({
   },
 });
 
-const LoginButton = ({ classes, onClick }: Props) => (
+const LoginButton = ({ classes, onClick, requestPending }: Props) => (
   <Button
     variant="contained"
     size="medium"
     className={classes.button}
     onClick={onClick}
   >
-    <KeyboardTab className={classes.extendedIcon} />
-    {Locale.login}
+    {requestPending ? (
+      <Progress />
+    ) : (
+      <React.Fragment>
+        <KeyboardTab className={classes.extendedIcon} />
+        {Locale.login}
+      </React.Fragment>
+    )}
   </Button>
 );
 

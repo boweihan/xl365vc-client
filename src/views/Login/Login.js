@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import Locale from 'shared/localization';
 import { login } from 'views/Login/actions.js';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ request }) => ({ request });
 const mapDispatchToProps = {
   login,
 };
@@ -22,6 +22,7 @@ const mapDispatchToProps = {
 type Props = {
   classes: Object,
   login: Function,
+  request: Object,
 };
 
 type State = {
@@ -69,8 +70,15 @@ class Login extends Component<Props, State> {
     this.setState(state => ({ showPassword: !state.showPassword }));
   };
 
+  handleKeyPress = evt => {
+    if (evt.key === 'Enter') {
+      const { account, password } = this.state;
+      this.props.login(account, password);
+    }
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, request } = this.props;
     const { account, password } = this.state;
     return (
       <div className={classes.loginContainer}>
@@ -80,6 +88,7 @@ class Login extends Component<Props, State> {
             label="Account"
             value={this.state.account}
             onChange={this.handleChange('account')}
+            onKeyPress={this.handleKeyPress}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -96,6 +105,7 @@ class Login extends Component<Props, State> {
             label="Password"
             value={this.state.password}
             onChange={this.handleChange('password')}
+            onKeyPress={this.handleKeyPress}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -113,7 +123,10 @@ class Login extends Component<Props, State> {
               ),
             }}
           />
-          <LoginButton onClick={() => this.props.login(account, password)} />
+          <LoginButton
+            requestPending={request.login}
+            onClick={() => this.props.login(account, password)}
+          />
         </div>
       </div>
     );
