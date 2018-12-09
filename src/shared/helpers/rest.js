@@ -149,7 +149,7 @@ export default class Rest {
     url: string,
     auth: string,
     bytes: Array<number>,
-    extension: string,
+    fileName: string,
   ) => {
     // bytes must be an array so that we can convert to a signed 8 byte array below
     var signedBytes = new Int8Array(bytes);
@@ -157,7 +157,7 @@ export default class Rest {
     var blob = new Blob([signedBytes], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     });
-    formData.append('file', blob, 'version.' + extension);
+    formData.append('file', blob, fileName);
 
     return Rest.post(url, auth, formData, {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',

@@ -9,6 +9,10 @@ export default class ApiService {
     return store.getState().auth.authObj.access_token;
   };
 
+  static getDocumentId = () => {
+    return store.getState().version.documentId;
+  };
+
   static login = (account, password) => {
     const bodyProps = {
       grant_type: 'password',
@@ -35,7 +39,7 @@ export default class ApiService {
       `${RESOURCE_SERVER_URL}/versions`,
       `Bearer ${ApiService.getBearerToken()}`,
       data,
-      'xlsx',
+      `${ApiService.getDocumentId()}_${new Date().getTime()}`,
     );
   };
 
