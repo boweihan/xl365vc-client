@@ -4,6 +4,12 @@ import store from 'shared/store/configureStore';
 const AUTH_SERVER_URL = 'http://localhost:8000';
 const RESOURCE_SERVER_URL = 'http://localhost:8001';
 
+const getDocumentName = () => {
+  const url = window.Office.context.document.url;
+  const splitUrl = url.split('/');
+  return splitUrl[splitUrl.length - 1];
+};
+
 export default class ApiService {
   static getBearerToken = () => {
     return store.getState().auth.authObj.access_token;
@@ -39,7 +45,7 @@ export default class ApiService {
       `${RESOURCE_SERVER_URL}/file/${ApiService.getDocumentId()}/versions`,
       `Bearer ${ApiService.getBearerToken()}`,
       data,
-      `${new Date().getTime()}.xlsx`,
+      getDocumentName(),
     );
   };
 
