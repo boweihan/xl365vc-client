@@ -14,7 +14,7 @@ let UIStrings = (function() {
     delete: 'Delete',
     togglePasswordVisibilty: 'Toggle password visibility',
     logoAlt: 'Version Buddy Logo',
-    viewVersions: 'View Saved Documents',
+    viewVersions: 'View Saved Versions',
     createVersion: 'Commit Version',
     creatingVersion: 'Saving your document...',
   };
