@@ -55,7 +55,6 @@ function HomeMainButton(props: Props) {
             <React.Fragment>
               <Typography
                 gutterBottom
-                variant="p"
                 component="p"
                 className={classes.textInner}
               >

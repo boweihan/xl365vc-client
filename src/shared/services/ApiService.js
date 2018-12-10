@@ -45,7 +45,7 @@ export default class ApiService {
       `${RESOURCE_SERVER_URL}/file/${ApiService.getDocumentId()}/versions`,
       `Bearer ${ApiService.getBearerToken()}`,
       data,
-      getDocumentName(),
+      `${getDocumentName()}_${new Date().getTime()}`,
     );
   };
 

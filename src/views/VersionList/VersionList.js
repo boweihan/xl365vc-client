@@ -18,6 +18,7 @@ import { HOME_ROUTE } from 'shared/constants/routes';
 import Locale from 'shared/localization';
 import { deleteVersion } from './actions';
 import Progress from 'core/Progress';
+import moment from 'moment';
 
 const mapStateToProps = ({ version, request }) => ({ version, request });
 const mapDispatchToProps = {
@@ -37,9 +38,14 @@ type State = {};
 
 const styles = theme => ({
   versionListContainer: {
+    height: '100%',
+  },
+  versionList: {
     width: '90%',
     margin: '5%',
     backgroundColor: theme.palette.background.paper,
+    maxHeight: '90vh',
+    overflow: 'scroll',
   },
   listItemText: {
     overflow: 'scroll',
@@ -60,36 +66,40 @@ class VersionList extends Component<Props, State> {
     return (
       <div className={classes.versionListContainer}>
         <VersionListBackBar onClick={() => updateRoute({ name: HOME_ROUTE })} />
-        {request.viewVersions ? (
-          <Progress />
-        ) : (
-          <List>
-            {version.fileVersions.map((fileVersion, i) => {
-              return (
-                <ListItem key={i}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FileCopy />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    className={classes.listItemText}
-                    primary={fileVersion.name}
-                    secondary={new Date().getTime()}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      aria-label={Locale.delete}
-                      onClick={() => deleteVersion(fileVersion.name)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              );
-            })}
-          </List>
-        )}
+        <div className={classes.versionList}>
+          {request.viewVersions ? (
+            <Progress />
+          ) : (
+            <List>
+              {version.fileVersions.map((fileVersion, i) => {
+                return (
+                  <ListItem key={i}>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <FileCopy />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      className={classes.listItemText}
+                      primary={fileVersion.name}
+                      secondary={moment(fileVersion.lastModified).format(
+                        'YYYY-MM-DD h:mm:ss a',
+                      )}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        aria-label={Locale.delete}
+                        onClick={() => deleteVersion(fileVersion.name)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+              })}
+            </List>
+          )}
+        </div>
       </div>
     );
   }
